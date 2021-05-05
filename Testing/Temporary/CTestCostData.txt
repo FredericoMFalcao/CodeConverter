@@ -1,0 +1,4 @@
+Runs 17 0.000344746
+HidesMultiLineComments 9 0.000659201
+SingleLineComments 1 0.00637615
+---

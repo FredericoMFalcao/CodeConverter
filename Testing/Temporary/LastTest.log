@@ -1,0 +1,53 @@
+Start testing: May 05 15:36 WEST
+----------------------------------------------------------
+1/3 Testing: Runs
+1/3 Test: Runs
+Command: "/bin/sh" "-c" "./CodeConverter < /dev/null"
+Directory: /Users/fredericofalcao/Desktop/CodeConverter
+"Runs" start time: May 05 15:36 WEST
+Output:
+----------------------------------------------------------
+<end of output>
+Test time =   0.01 sec
+----------------------------------------------------------
+Test Passed.
+"Runs" end time: May 05 15:36 WEST
+"Runs" time elapsed: 00:00:00
+----------------------------------------------------------
+
+2/3 Testing: HidesMultiLineComments
+2/3 Test: HidesMultiLineComments
+Command: "/bin/sh" "-c" "./CodeConverter --hide-comments < CodeSample1.txt"
+Directory: /Users/fredericofalcao/Desktop/CodeConverter
+"HidesMultiLineComments" start time: May 05 15:36 WEST
+Output:
+----------------------------------------------------------
+
+Hello Mars
+<end of output>
+Test time =   0.01 sec
+----------------------------------------------------------
+Test Pass Reason:
+Required regular expression found. Regex=[^
+Hello Mars
+$]
+"HidesMultiLineComments" end time: May 05 15:36 WEST
+"HidesMultiLineComments" time elapsed: 00:00:00
+----------------------------------------------------------
+
+3/3 Testing: SingleLineComments
+3/3 Test: SingleLineComments
+Command: "/bin/sh" "-c" "./CodeConverter --hide-comments < CodeSample2.txt"
+Directory: /Users/fredericofalcao/Desktop/CodeConverter
+"SingleLineComments" start time: May 05 15:36 WEST
+Output:
+----------------------------------------------------------
+<end of output>
+Test time =   0.01 sec
+----------------------------------------------------------
+Test Passed.
+"SingleLineComments" end time: May 05 15:36 WEST
+"SingleLineComments" time elapsed: 00:00:00
+----------------------------------------------------------
+
+End testing: May 05 15:36 WEST

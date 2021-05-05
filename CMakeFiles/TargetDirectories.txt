@@ -1,0 +1,4 @@
+/Users/fredericofalcao/Desktop/CodeConverter/CMakeFiles/rebuild_cache.dir
+/Users/fredericofalcao/Desktop/CodeConverter/CMakeFiles/edit_cache.dir
+/Users/fredericofalcao/Desktop/CodeConverter/CMakeFiles/test.dir
+/Users/fredericofalcao/Desktop/CodeConverter/CMakeFiles/CodeConverter.dir
