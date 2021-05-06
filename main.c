@@ -1,7 +1,8 @@
 
 #include "main.h"
 
-int help() {
+int help(char *argv0) {
+	fprintf(stderr, "Usage: %s [Options]\n[Options]:\n", argv0);
  
 	multiline_comments_help();
  
@@ -21,7 +22,7 @@ int main( int argc, char**argv) {
 
 	/* 1. Get operations MODE */
 	for(int i = 0; i < argc; i++) {
-		if (streq(argv[i], "--help")) return help();
+		if (streq(argv[i], "--help")) return help(argv[0]);
  
 		multiline_comments_command_line_mode(argv[i]);
  

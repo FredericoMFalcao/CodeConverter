@@ -12,9 +12,9 @@
 * 2. INTERNAL LIBs
 *
 */
-	#include "modules/multiline_comments.h"
-	#include "modules/sample.h"
-	#include "modules/singleline_comments.h"
+	#include "modules/multiline_comments/multiline_comments.h"
+	#include "modules/sample/sample.h"
+	#include "modules/singleline_comments/singleline_comments.h"
  
 
 #define MODE_REPLACE_STR_LITERALS    1
@@ -42,3 +42,4 @@ int parseInput(char *in_str, char *out_str, size_t out_length);
 
 
 #endif
+/* vim:set syntax=c: */

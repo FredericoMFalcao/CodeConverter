@@ -1,5 +1,5 @@
 /*
-*   SINGLE LINE COMMENTS 
+*   MULTI LINE COMMENTS 
 *
 */
 
@@ -8,15 +8,13 @@
 #include <stdio.h>   /* fprintf(), stderr */
 
 /* 2. INTERNAL LIBs */
-#include "../parseInput.h"
+#include "../../parseInput.h"
 
 /* 3. CONSTANTS */
 
 /* 4. INTERNAL FUNCTIONS */
 #define streq(a,b) (strcmp(a,b) == 0)
 
-
-
-void singleline_comments_new_char(char c, char d);
-void singleline_comments_command_line_mode(char *str);
-void singleline_comments_help();
+void multiline_comments_new_char(char c, char d);
+void multiline_comments_command_line_mode(char *str);
+void multiline_comments_help();

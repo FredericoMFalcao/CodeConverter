@@ -1,8 +1,9 @@
-<?php $modules=[];foreach(scandir("modules") as $file) if (substr($file, -2) != ".c") continue; else $modules[]=substr($file, 0, -2); ?>
+<?php require_once "base.php"; ?>
 
 #include "main.h"
 
-int help() {
+int help(char *argv0) {
+	fprintf(stderr, "Usage: %s [Options]\n[Options]:\n", argv0);
 <?php foreach($modules as $module_name) : ?> 
 	<?=$module_name?>_help();
 <?php endforeach; ?>
@@ -19,7 +20,7 @@ int main( int argc, char**argv) {
 
 	/* 1. Get operations MODE */
 	for(int i = 0; i < argc; i++) {
-		if (streq(argv[i], "--help")) return help();
+		if (streq(argv[i], "--help")) return help(argv[0]);
 <?php foreach($modules as $module_name) : ?> 
 		<?=$module_name?>_command_line_mode(argv[i]);
 <?php endforeach; ?>

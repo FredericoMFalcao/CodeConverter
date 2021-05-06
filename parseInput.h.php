@@ -1,4 +1,4 @@
-<?php $modules=[];foreach(scandir("modules") as $file) if (substr($file, -2) != ".c") continue; else $modules[]=substr($file, 0, -2); ?>
+<?php require_once "base.php"; ?>
 #ifndef _parseInput_h
 #define _parseInput_h
 
@@ -14,7 +14,7 @@
 *
 */
 <?php foreach($modules as $module_name) : ?>
-	#include "modules/<?=$module_name?>.h"
+	#include "modules/<?=$module_name?>/<?=$module_name?>.h"
 <?php endforeach; ?> 
 
 #define MODE_REPLACE_STR_LITERALS    1
@@ -42,3 +42,4 @@ int parseInput(char *in_str, char *out_str, size_t out_length);
 
 
 #endif
+/* vim:set syntax=c: */

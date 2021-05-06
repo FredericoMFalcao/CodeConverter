@@ -1,14 +1,30 @@
 MAIN_EXECUTABLE=CodeConverter
-shell=bash
-OBJECTS=modules/multiline_comments.o \
-	modules/singleline_comments.o\
-	modules/sample.o
+MODULES=multiline_comments singleline_comments sample
+
+SHELL=bash
+OBJECTS=$(addsuffix .o,$(addprefix modules/,$(join $(MODULES),$(addprefix /,$(MODULES)))))
+TESTS=$(addsuffix /produced.test, $(addprefix modules/,$(MODULES)))
+define STRIP_MODULE_NAME_FROM_TEST
+	$(strip $(subst /produced.test,,$(subst modules/,,$1)))
+endef
+
 CC=gcc
+SOURCES=main.c parseInput.c $(OBJECTS) 
+
+RED:=\033[0;31m
+GREEN:=\033[0;32m
+YELLOW:=\033[0;33m
+NC:=\033[0m
+
+##################################
+#
+# 1. BUILD
+#
+##################################
 
 
 
-
-all: main.c parseInput.c $(OBJECTS)
+all: $(SOURCES) $(OBJECTS)
 	$(CC) -o $(MAIN_EXECUTABLE) $^
 
 %.h: %.h.php
@@ -17,12 +33,23 @@ all: main.c parseInput.c $(OBJECTS)
 	$(shell php $< > $@)
 
 %.o: %.c
-	$(CC) -c -o $@ $<
+	@$(CC) -c -o $@ $<
 
-test:
 
+##################################
+#
+# 2. TEST
+#
+##################################
+
+all-tests: $(MODULES)
+	@diff -q $(dir $@)/produced.test $(dir $@)/out.test 2>&1 > /dev/null && echo -e '[ $(GREEN)SUCCESS$(NC) ] Test $@ Passed.' || echo -e '[ $(RED)FAILED$(NC) ] Test $@ failed.'
+
+test: $(TESTS)
+
+%/produced.test: %/in.test %/out.test $(SOURCES)
+	@./$(MAIN_EXECUTABLE) $(file < $(dir $@)flags.test) < $< > $@
+	@diff -q $(dir $@)/produced.test $(dir $@)/out.test 2>&1 > /dev/null && echo -e '[ $(GREEN)SUCCESS$(NC) ] Test $(call STRIP_MODULE_NAME_FROM_TEST,$@) passed.' || echo -e '[ $(RED)FAILED$(NC) ] Test $(call STRIP_MODULE_NAME_FROM_TEST,$@) failed.'
 
 clean:
-	@rm main.c
-	@rm parseInput.c
-	@rm parseInput.h
+	@rm $(SOURCES) $(TESTS)

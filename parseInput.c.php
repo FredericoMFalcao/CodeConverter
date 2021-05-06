@@ -1,4 +1,4 @@
-<?php $modules=[];foreach(scandir("modules") as $file) if (substr($file, -2) != ".c") continue; else $modules[]=substr($file, 0, -2); ?>
+<?php require_once "base.php"; ?>
 
 #include "parseInput.h"
 int mode = 0;
