@@ -2,7 +2,7 @@ MAIN_EXECUTABLE=CodeConverter
 MODULES=$(shell ls modules/)
 
 SHELL=bash
-OBJECTS=$(addsuffix .o,$(addprefix modules/,$(join $(MODULES),$(addprefix /,$(MODULES)))))
+OBJECTS=$(addsuffix /main.o,$(addprefix modules/,$(MODULES)))
 TESTS=$(addsuffix /produced.test, $(addprefix modules/,$(MODULES)))
 define STRIP_MODULE_NAME_FROM_TEST
 	$(strip $(subst /produced.test,,$(subst modules/,,$1)))
@@ -53,3 +53,4 @@ test: $(TESTS)
 
 clean:
 	@rm $(SOURCES) $(TESTS)
+	@rm parseInput.h

@@ -2,7 +2,7 @@
 *   MULTI LINE COMMENTS 
 *
 */
-#include "multiline_comments.h"
+#include "main.h"
 int multiline_comments_mode = 0;
 int multiline_comments_state = 0;
 

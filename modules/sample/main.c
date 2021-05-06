@@ -2,7 +2,7 @@
 *   SAMPLE 
 *
 */
-#include "sample.h"
+#include "main.h"
 int sample_mode = 0;
 int sample_state = 0;
 

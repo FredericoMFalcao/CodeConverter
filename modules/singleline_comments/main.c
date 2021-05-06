@@ -2,7 +2,7 @@
 *   SINGLE LINE COMMENTS 
 *
 */
-#include "singleline_comments.h"
+#include "main.h"
 
 
 #define streq(a,b) (strcmp(a,b) == 0)

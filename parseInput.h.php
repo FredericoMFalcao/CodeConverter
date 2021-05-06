@@ -14,7 +14,7 @@
 *
 */
 <?php foreach($modules as $module_name) : ?>
-	#include "modules/<?=$module_name?>/<?=$module_name?>.h"
+	#include "modules/<?=$module_name?>/main.h"
 <?php endforeach; ?> 
 
 #define MODE_REPLACE_STR_LITERALS    1
