@@ -1,13 +1,11 @@
+<?php $modules=[];foreach(scandir("modules") as $file) if (substr($file, -2) != ".c") continue; else $modules[]=substr($file, 0, -2); ?>
 
 #include "main.h"
 
 int help() {
- 
-	multiline_comments_help();
- 
-	sample_help();
- 
-	singleline_comments_help();
+<?php foreach($modules as $module_name) : ?> 
+	<?=$module_name?>_help();
+<?php endforeach; ?>
 
 	return 1;
 }
@@ -22,12 +20,9 @@ int main( int argc, char**argv) {
 	/* 1. Get operations MODE */
 	for(int i = 0; i < argc; i++) {
 		if (streq(argv[i], "--help")) return help();
- 
-		multiline_comments_command_line_mode(argv[i]);
- 
-		sample_command_line_mode(argv[i]);
- 
-		singleline_comments_command_line_mode(argv[i]);
+<?php foreach($modules as $module_name) : ?> 
+		<?=$module_name?>_command_line_mode(argv[i]);
+<?php endforeach; ?>
 	}
 
 

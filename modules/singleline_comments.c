@@ -9,7 +9,7 @@ int singleline_comments_mode = 0;
 
 void singleline_comments_new_char(char c, char d) {
 	// Skip changes if module was not activated
-	if (!multiline_comments_mode) return;
+	if (!singleline_comments_mode) return;
 	
 	if (state == STATE_SOURCE_CODE && c == '/' && d == '/') {
 		state = STATE_SINGLELINE_COMMENT;
@@ -25,4 +25,6 @@ void singleline_comments_new_char(char c, char d) {
 void singleline_comments_command_line_mode(char *str) {
 	if (streq(str, "--hide--comments")) singleline_comments_mode = 1;
 
+}
+void singleline_comments_help() {
 }

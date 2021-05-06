@@ -1,3 +1,4 @@
+<?php $modules=[];foreach(scandir("modules") as $file) if (substr($file, -2) != ".c") continue; else $modules[]=substr($file, 0, -2); ?>
 #ifndef _parseInput_h
 #define _parseInput_h
 
@@ -12,10 +13,9 @@
 * 2. INTERNAL LIBs
 *
 */
-	#include "modules/multiline_comments.h"
-	#include "modules/sample.h"
-	#include "modules/singleline_comments.h"
- 
+<?php foreach($modules as $module_name) : ?>
+	#include "modules/<?=$module_name?>.h"
+<?php endforeach; ?> 
 
 #define MODE_REPLACE_STR_LITERALS    1
 #define MODE_HIDE_COMMENTS           2

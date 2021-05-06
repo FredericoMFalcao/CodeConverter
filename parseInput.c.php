@@ -1,3 +1,4 @@
+<?php $modules=[];foreach(scandir("modules") as $file) if (substr($file, -2) != ".c") continue; else $modules[]=substr($file, 0, -2); ?>
 
 #include "parseInput.h"
 int mode = 0;
@@ -9,10 +10,9 @@ int parseInput(char *in_str, char *out_str, size_t out_length) {
 	while (in_str[in_cursor] != '\0' && out_cursor < out_length) {
 		char c = in_str[in_cursor++];
 		char d = (c=='\0'?'\0':in_str[in_cursor]);
-		multiline_comments_new_char(c, d);
-		sample_new_char(c, d);
-		singleline_comments_new_char(c, d);
- 
+<?php foreach($modules as $module_name) : ?>
+		<?=$module_name?>_new_char(c, d);
+<?php endforeach; ?> 
 
 		if (!(mode & MODE_HIDE_OUTPUT)) {
 			if (mode & MODE_HIDE_NEXT_2CHAR) {

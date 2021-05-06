@@ -1,4 +1,4 @@
-# Install script for directory: /Users/fredericofalcao/Desktop/CodeConverter
+# Install script for directory: /Users/fredericofalcao/CodeConverter
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)
@@ -45,5 +45,5 @@ endif()
 
 string(REPLACE ";" "\n" CMAKE_INSTALL_MANIFEST_CONTENT
        "${CMAKE_INSTALL_MANIFEST_FILES}")
-file(WRITE "/Users/fredericofalcao/Desktop/CodeConverter/${CMAKE_INSTALL_MANIFEST}"
+file(WRITE "/Users/fredericofalcao/CodeConverter/${CMAKE_INSTALL_MANIFEST}"
      "${CMAKE_INSTALL_MANIFEST_CONTENT}")

@@ -26,3 +26,6 @@ void multiline_comments_new_char(char c, char d) {
 void multiline_comments_command_line_mode(char *str) {
 	if (streq(str, "--hide-comments")) multiline_comments_mode = 1;
 }
+void multiline_comments_help() {
+	fprintf(stderr, "\t--hide-comments\n\t\thides all the inline and multi-line comments\n");
+}
