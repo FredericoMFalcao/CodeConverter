@@ -1,5 +1,5 @@
 MAIN_EXECUTABLE=CodeConverter
-MODULES=multiline_comments singleline_comments sample
+MODULES=$(shell ls modules/)
 
 SHELL=bash
 OBJECTS=$(addsuffix .o,$(addprefix modules/,$(join $(MODULES),$(addprefix /,$(MODULES)))))
@@ -33,7 +33,7 @@ all: $(SOURCES) $(OBJECTS)
 	$(shell php $< > $@)
 
 %.o: %.c
-	@$(CC) -c -o $@ $<
+	$(CC) -c -o $@ $<
 
 
 ##################################

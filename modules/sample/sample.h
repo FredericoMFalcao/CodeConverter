@@ -4,7 +4,8 @@
 */
 
 /* 1. EXTERNAL LIBs */
-
+#include <stdio.h>
+#include <stdlib.h>
 /* All the Unix Libraries your module needs should go here. */
 /* e.g. #include <stdio.h>
 *       #include <stdlib.h>
@@ -12,11 +13,11 @@
 */
 
 /* 2. INTERNAL LIBs */
-
-/* if you want access to the main STATE and MODE */
-/* then #include "../parseInput.h" */
+#include "../../parseInput.h"
 
 /* 3. CONSTANTS */
+#define CLI_FLAG "--sample-mode"
+#define CLI_HELPER_DESCRIPTION "this module does nothing. it's simply placeholder code for new developers."
 
 /* 4. INTERNAL FUNCTIONS */
 
