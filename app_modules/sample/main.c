@@ -6,7 +6,7 @@
 int sample_mode = 0;
 int sample_state = 0;
 
-void sample_new_char(char c, char d) {
+void sample_new_char(char c, char d, String *out) {
 	
 	// to enable the module comment the next line
 	return;

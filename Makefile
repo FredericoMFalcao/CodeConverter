@@ -1,15 +1,19 @@
 MAIN_EXECUTABLE=CodeConverter
-MODULES=$(shell ls modules/)
+APP_MODULES=$(shell ls app_modules/)
+SYS_MODULES=$(shell ls sys_modules/)
 
 SHELL=bash
-OBJECTS=$(addsuffix /main.o,$(addprefix modules/,$(MODULES)))
-TESTS=$(addsuffix /produced.test, $(addprefix modules/,$(MODULES)))
+SYS_OBJECTS=$(addsuffix /main.o,$(addprefix sys_modules/,$(SYS_MODULES)))
+APP_OBJECTS=$(addsuffix /main.o,$(addprefix app_modules/,$(APP_MODULES)))
+
+TESTS=$(addsuffix /produced.test, $(addprefix app_modules/,$(APP_MODULES)))
 define STRIP_MODULE_NAME_FROM_TEST
-	$(strip $(subst /produced.test,,$(subst modules/,,$1)))
+	$(strip $(subst /produced.test,,$(subst app_modules/,,$1)))
 endef
 
 CC=gcc
-SOURCES=main.c parseInput.c $(OBJECTS) 
+SOURCES=main.c parseInput.c $(APP_OBJECTS) $(SYS_OBJECTS)
+SOURCE_HEADERS=main.h parseInput.h
 
 RED:=\033[0;31m
 GREEN:=\033[0;32m
@@ -24,8 +28,8 @@ NC:=\033[0m
 
 
 
-all: $(SOURCES) $(OBJECTS)
-	$(CC) -o $(MAIN_EXECUTABLE) $^
+all: $(SOURCES) $(SOURCE_HEADERS)
+	$(CC) -o $(MAIN_EXECUTABLE) $(SOURCES)
 
 %.h: %.h.php
 	$(shell [ -f $< ] && php $< > $@)
@@ -33,7 +37,7 @@ all: $(SOURCES) $(OBJECTS)
 	$(shell php $< > $@)
 
 %.o: %.c
-	$(CC) -c -o $@ $<
+	$(CC) -c '-DCLI_FLAG="$(file < $(dir $@)flag)"' -o $@ $<
 
 
 ##################################
@@ -42,15 +46,11 @@ all: $(SOURCES) $(OBJECTS)
 #
 ##################################
 
-all-tests: $(MODULES)
-	@diff -q $(dir $@)/produced.test $(dir $@)/out.test 2>&1 > /dev/null && echo -e '[ $(GREEN)SUCCESS$(NC) ] Test $@ Passed.' || echo -e '[ $(RED)FAILED$(NC) ] Test $@ failed.'
-
 test: $(TESTS)
 
-%/produced.test: %/in.test %/out.test $(SOURCES)
-	@./$(MAIN_EXECUTABLE) $(file < $(dir $@)flags.test) < $< > $@
-	@diff -q $(dir $@)/produced.test $(dir $@)/out.test 2>&1 > /dev/null && echo -e '[ $(GREEN)SUCCESS$(NC) ] Test $(call STRIP_MODULE_NAME_FROM_TEST,$@) passed.' || echo -e '[ $(RED)FAILED$(NC) ] Test $(call STRIP_MODULE_NAME_FROM_TEST,$@) failed.'
+%/produced.test: %/in.test %/out.test $(MAIN_EXECUTABLE)
+	@./$(MAIN_EXECUTABLE) $(file < $(dir $@)flag) < $< > $@
+	@diff -q $(dir $@)/produced.test $(dir $@)/out.test 3>&1 > /dev/null && echo -e '[ $(GREEN)SUCCESS$(NC) ] Test $(call STRIP_MODULE_NAME_FROM_TEST,$@) passed.' || echo -e '[ $(RED)FAILED$(NC) ] Test $(call STRIP_MODULE_NAME_FROM_TEST,$@) failed.'
 
 clean:
-	@rm $(SOURCES) $(TESTS)
-	@rm parseInput.h
+	@rm $(SOURCES) $(TESTS) $(SOURCE_HEADERS)

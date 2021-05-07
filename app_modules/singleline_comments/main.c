@@ -8,7 +8,7 @@
 #define streq(a,b) (strcmp(a,b) == 0)
 int singleline_comments_mode = 0;
 
-void singleline_comments_new_char(char c, char d) {
+void singleline_comments_new_char(char c, char d, String *out) {
 	// Skip changes if module was not activated
 	if (!singleline_comments_mode) return;
 	

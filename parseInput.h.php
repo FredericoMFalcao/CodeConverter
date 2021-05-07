@@ -8,13 +8,15 @@
 */
 
 #include <stdlib.h> /* size_t */
+#include <strings.h> /* strlen() */
 
 /*
 * 2. INTERNAL LIBs
 *
 */
+#include "sys_modules/string/main.h"
 <?php foreach($modules as $module_name) : ?>
-	#include "modules/<?=$module_name?>/main.h"
+	#include "app_modules/<?=$module_name?>/main.h"
 <?php endforeach; ?> 
 
 #define MODE_REPLACE_STR_LITERALS    1
@@ -38,8 +40,7 @@ extern int mode;
 extern int state;
 
 
-int parseInput(char *in_str, char *out_str, size_t out_length);
-
+int parseInput(String *in, String *out);
 
 #endif
 /* vim:set syntax=c: */

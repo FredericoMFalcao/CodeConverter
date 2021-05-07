@@ -6,7 +6,7 @@
 int multiline_comments_mode = 0;
 int multiline_comments_state = 0;
 
-void multiline_comments_new_char(char c, char d) {
+void multiline_comments_new_char(char c, char d, String *out) {
 	// Skip changes if module was not activated
 	if (multiline_comments_mode == 0) return;
 

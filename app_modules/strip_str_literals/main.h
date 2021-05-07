@@ -1,5 +1,5 @@
 /*
-*   SAMPLE
+*   strip_str_literals
 *
 */
 
@@ -16,7 +16,6 @@
 #include "../../parseInput.h"
 
 /* 3. CONSTANTS */
-#define CLI_FLAG "--sample-mode"
 #define CLI_HELPER_DESCRIPTION "this module does nothing. it's simply placeholder code for new developers."
 
 /* 4. INTERNAL FUNCTIONS */
@@ -24,13 +23,13 @@
 /* You should implement the following functions : 
 *
 *  
-*  void sample_new_char(char c, char d);
+*  void strip_str_literals_new_char(char c, char d);
 *	- called everytime a new character is processed in the input stream
 *
-*  void sample_command_line_mode(char *str);
+*  void strip_str_literals_command_line_mode(char *str);
 *       - called to process the command line arguments
 *
 */
-void sample_new_char(char c, char d);
-void sample_command_line_mode(char *str);
-void sample_help();
+void strip_str_literals_new_char(char c, char d, String *out);
+void strip_str_literals_command_line_mode(char *str);
+void strip_str_literals_help();

@@ -14,11 +14,11 @@ int help(char *argv0) {
 
 int main( int argc, char**argv) {
 
-	char *in_str = NULL;
-	char *out_str = NULL;
+	String *in = stringAllocAndInit();
 	int cursor = 0;
 
 	/* 1. Get operations MODE */
+	if (argc == 1) return help(argv[0]);
 	for(int i = 0; i < argc; i++) {
 		if (streq(argv[i], "--help")) return help(argv[0]);
 <?php foreach($modules as $module_name) : ?> 
@@ -29,25 +29,21 @@ int main( int argc, char**argv) {
 
 	/* 2. Read INPUT into a variable */
 	while(!feof(stdin)) {
-		if (cursor % 1024 == 0)
-			in_str = realloc(in_str, cursor + 1024);
 		char c = fgetc(stdin);
 		if (c == -1 ) break;
-		in_str[cursor++] = c;
+		appendCharToString(in, c);
 	}
 	
-	in_str[cursor] = '\0';
-
-	int out_str_length = cursor * 2;
-	out_str = malloc(out_str_length);
+	appendCharToString(in, '\0');
 
 	/* 3. Call MAIN ACTION function */
-	parseInput(in_str, out_str, out_str_length);
+	String *out = stringAllocAndInit();
+	parseInput(in, out);
 
 	/* 4. Print OUTPUT */
 	cursor = 0;
-	while(out_str[cursor] != '\0')
-		fputc(out_str[cursor++], stdout);
+	while(out->value[cursor] != '\0')
+		fputc(out->value[cursor++], stdout);
 
 
 
