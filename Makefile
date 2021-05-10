@@ -1,6 +1,6 @@
 MAIN_EXECUTABLE=CodeConverter
-APP_MODULES=$(shell ls app_modules/)
-SYS_MODULES=$(shell ls sys_modules/)
+APP_MODULES=$(notdir $(shell find app_modules/* -type d))
+SYS_MODULES=$(notdir $(shell find sys_modules/* -type d))
 
 SHELL=bash
 SYS_OBJECTS=$(addsuffix /main.o,$(addprefix sys_modules/,$(SYS_MODULES)))
@@ -37,7 +37,8 @@ all: $(SOURCES) $(SOURCE_HEADERS)
 	$(shell php $< > $@)
 
 %.o: %.c
-	$(CC) -c '-DCLI_FLAG="$(file < $(dir $@)flag)"' -o $@ $<
+	cd $(dir $<) && $(MAKE)
+	#$(CC) -c '-DCLI_FLAG="$(file < $(dir $@)flag)"' -o $@ $<
 
 
 ##################################

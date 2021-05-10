@@ -1,1 +1,6 @@
 *.DS_Store
+./CodeConverter
+main.c
+main.h
+parseInput.c
+parseInput.h

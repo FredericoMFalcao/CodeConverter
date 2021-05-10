@@ -4,6 +4,8 @@
 */
 #include "main.h"
 
+#define streq(a,b) (strcmp(a,b) == 0)
+
 #define DOUBLE_QUOTE_STRING 1
 #define SINGLE_QUOTE_STRING 2
 #define ESCAPE_NEXT_CHARACTER 4
