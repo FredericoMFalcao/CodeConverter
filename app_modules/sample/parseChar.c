@@ -1,4 +1,4 @@
-void sample_new_char(char c, char d, String *out) {
+void sample_parseChar(char c, char d, String *out) {
 	
 	// to enable the module comment the next line
 	return;

@@ -1,5 +1,5 @@
 SHELL=bash
-MODULE_NAME=Sample
+MODULE_NAME=comments
 all:
 	$(CC) -c '-DCLI_FLAG="$(file < flag)"' -o main.o main.c
 

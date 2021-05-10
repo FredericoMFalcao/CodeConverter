@@ -11,7 +11,7 @@ int parseInput(String *in, String *out) {
 		char c = in->value[in_cursor++];
 		char d = (c=='\0'?'\0':in->value[in_cursor]);
 <?php foreach($modules as $module_name) : ?>
-		<?=$module_name?>_new_char(c, d, out);
+		<?=$module_name?>_parseChar(c, d, out);
 <?php endforeach; ?> 
 		// printf("read char %c, current length : %d, current capacity: %d, current value : %s\n",c,out->length, out->capacity, out->value);
 		if (!(mode & MODE_HIDE_OUTPUT)) {

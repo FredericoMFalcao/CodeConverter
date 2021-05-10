@@ -38,7 +38,6 @@ all: $(SOURCES) $(SOURCE_HEADERS)
 
 %.o: %.c
 	cd $(dir $<) && $(MAKE)
-	#$(CC) -c '-DCLI_FLAG="$(file < $(dir $@)flag)"' -o $@ $<
 
 
 ##################################
@@ -50,8 +49,8 @@ all: $(SOURCES) $(SOURCE_HEADERS)
 test: $(TESTS)
 
 %/produced.test: %/in.test %/out.test $(MAIN_EXECUTABLE)
-	@./$(MAIN_EXECUTABLE) $(file < $(dir $@)flag) < $< > $@
-	@diff -q $(dir $@)/produced.test $(dir $@)/out.test 3>&1 > /dev/null && echo -e '[ $(GREEN)SUCCESS$(NC) ] Test $(call STRIP_MODULE_NAME_FROM_TEST,$@) passed.' || echo -e '[ $(RED)FAILED$(NC) ] Test $(call STRIP_MODULE_NAME_FROM_TEST,$@) failed.'
+	cd $(dir $<) && MAIN_EXECUTABLE=../../$(MAIN_EXECUTABLE) $(MAKE) test
 
 clean:
+	rm main.c main.h parseInput.c parseInput.h
 	@rm $(SOURCES) $(TESTS) $(SOURCE_HEADERS)
